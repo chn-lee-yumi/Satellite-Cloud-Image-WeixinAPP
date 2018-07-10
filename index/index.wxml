@@ -17,8 +17,8 @@
   <view class="page__ft">
     <view>作者: CHN-Lee-Yumi</view>
     <view>License: GPL-3.0</view>
-    <view>项目地址: https://github.com/chn-lee-yumi</view>
-    <view>数据来源：中央气象台</view>
+    <view>GitHub: https://github.com/chn-lee-yumi/Satillite-Cloud-Image-WeixinAPP</view>
+    <view>数据来源：中央气象台、国家卫星气象中心</view>
     <view>注：制作小程序纯属个人兴趣爱好，</view>
     <view>你也可以从“中央气象台”的公众号获取到这些信息。</view>
   </view>
