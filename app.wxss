@@ -33,12 +33,19 @@ page {
 }
 
 .page__desc {
-  margin-top: 5px;
   color: #888;
   text-align: left;
   font-size: 14px;
 }
 
-.mini-btn {
+.weui-btn {
   margin-right: 5px;
+  margin-bottom: 5px;
+  width: 180rpx;
+}
+
+.container {
+  display: flex;
+  justify-content:space-between;
+  flex-wrap: wrap
 }

@@ -1,0 +1,16 @@
+<!--index/video.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="page__desc">最近72小时中国区视频（视频大小约58M）</view>
+    <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.china.72h.mp4?v={{time}}"></video>
+    <view class="page__desc">最近72小时全圆盘视频（视频大小约41M）</view>
+    <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.disk.72h.mp4?v={{time}}"></video>
+  </view>
+  <view class="page__ft">
+    <view>作者: CHN-Lee-Yumi</view>
+    <view>License: GPL-3.0</view>
+    <view>GitHub: chn-lee-yumi/Satillite-Cloud-Image-WeixinAPP</view>
+    <view>数据来源：中央气象台、国家卫星气象中心</view>
+  </view>
+</view>
+

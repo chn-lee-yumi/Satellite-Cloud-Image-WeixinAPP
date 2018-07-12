@@ -1,11 +1,30 @@
 {
-  "pages":[
-    "index/index"
+  "pages": [
+    "index/index",
+    "index/video",
+    "index/gif"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "气象卫星云图",
     "navigationBarBackgroundColor": "#f8f8f8",
     "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "text": "实时云图",
+        "pagePath": "index/index"
+      },
+      {
+        "text": "动图",
+        "pagePath": "index/gif"
+      },
+      {
+        "text": "视频",
+        "pagePath": "index/video"
+      }
+    ],
+    "position": "top"
   }
 }
