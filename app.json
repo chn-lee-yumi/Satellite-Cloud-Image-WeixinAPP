@@ -2,7 +2,8 @@
   "pages": [
     "index/index",
     "index/video",
-    "index/gif"
+    "index/gif",
+    "index/info"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -23,6 +24,10 @@
       {
         "text": "视频",
         "pagePath": "index/video"
+      },
+      {
+        "text": "介绍",
+        "pagePath": "index/info"
       }
     ],
     "position": "top"

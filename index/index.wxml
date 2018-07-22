@@ -12,12 +12,18 @@
     <image src="{{imgsrc}}" style="width: 750rpx;" lazy-load="true" mode="widthFix" bindload="imageLoad" bindtap="imageTap"></image>
     <view class="page__bd_spacing">
       <button type="default" bindtap="openList">云图类别</button>
+      <view class="page__desc">
+        <view>小图平均一张约350KB。</view>
+        <view>点击图片可以查看高清大图。</view>
+        <view>风云系列卫星的大图约500KB。</view>
+        <view>其它卫星的大图约1.7MB~2.7MB。</view>
+      </view>
     </view>
   </view>
   <view class="page__ft">
     <view>作者: CHN-Lee-Yumi</view>
     <view>License: GPL-3.0</view>
     <view>GitHub: chn-lee-yumi/Satillite-Cloud-Image-WeixinAPP</view>
-    <view>数据来源：中央气象台、国家卫星气象中心</view>
+    <view>数据来源：中央气象台、国家卫星气象中心、交通部中央气象局（台湾）、美国国家海洋和大气管理局</view>
   </view>
 </view>

@@ -3,6 +3,13 @@ const hotapp = require('../utils/hotapp.js')
 
 //TODO: 播放功能按云图时间间隔来设定间隔（FY4A的图片拍照间隔不是相同的……不懂为啥）
 
+/*
+其它数据：（因为有FY4A，所以我觉得这个没必要做进小程序里）
+风云二号72小时动图（包括各种图）：http://www.nsmc.org.cn/NSMC/Channels/100028.html
+（彩色云图接口）http://www.nsmc.org.cn/NSMC/datalist/fy2_color.txt
+（URL例子）http://img.nsmc.org.cn/CLOUDIMAGE/FY2/WXCL/SEVP_NSMC_WXCL_ASC_E99_ACHN_LNO_PY_20180721071500000.JPG
+*/
+
 Page({
   data: {
     imgsrc: "",
@@ -15,7 +22,7 @@ Page({
   },
 
   onLoad: function() {
-    const FY4A = "http://www.nmc.cn/rest/category/d3236549863e453aab0ccc4027105bad"
+    const FY4A = "http://www.nmc.cn/rest/category/d3236549863e453aab0ccc4027105bad" //图像列表接口
     var that = this
     hotapp.request({
       useProxy: true,
