@@ -1,13 +1,12 @@
 # 微信小程序：气象卫星云图
 - 由于“卫星云图”这个名字已经被注册了，所以我就使用了这个名字。  
-- 目前还在开发中。  
 - 因为wx.request不支持http，所以小程序采用了hotapp作为代理。如果要使用，需要先上hotapp注册，获得一个key，填入对应位置中。（我上传到GitHub的key是假的）
 
 ## 更新日志（主要功能更新）
 - v1.0.0 包含实时云图功能，包括FY4A真彩色、FY2E彩色云图、FY4A中国区高清、FY4A圆盘图高清。其中前面两个来自中央气象台，后面两个来自国家卫星气象中心。  
 - v1.1.0 新增视频（最近72小时中国区视频、最近72小时全圆盘视频），来自国家卫星气象中心。  
 - v1.2.0 新增动图，FY4A真彩色。图片列表来自中央气象台。  
-- v1.3.0 新增Hamawari8卫星云图和GOES16卫星云图。将“FY2E彩色云图”改名为“风云二号彩色云图”，原因是这个云图实际上是G星和E星双星观测的，G星进行整点观测，E星进行半点观测。（http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xqxyw/201706/t20170601_418013.html、http://www.nsmc.org.cn/NSMC/Channels/100028.html）
+- v1.3.0 新增Hamawari8卫星云图和GOES16卫星云图。将“FY2E彩色云图”改名为“风云二号彩色云图”，原因是这个云图实际上是G星和E星双星观测的，G星进行整点观测，E星进行半点观测。（http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xqxyw/201706/t20170601_418013.html http://www.nsmc.org.cn/NSMC/Channels/100028.html）
 
 ## 更多信息
 - 卫星介绍：http://fy4.nsmc.org.cn/portal/cn/satellite/index.html  
