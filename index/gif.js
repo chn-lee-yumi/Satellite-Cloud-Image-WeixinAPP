@@ -22,7 +22,7 @@ Page({
   },
 
   onLoad: function() {
-    const FY4A = "http://www.nmc.cn/rest/category/d3236549863e453aab0ccc4027105bad" //图像列表接口
+    const FY4A = "（收到中央气象局警告，链接已删除）" //图像列表接口
     var that = this
     hotapp.request({
       useProxy: true,
@@ -88,7 +88,7 @@ Page({
   imageTap: function(event) {
     var full_imgurl = []
     for (var i = this.data.img_num_max - 1; i >= 0; i--) {
-      full_imgurl.push("http://image.nmc.cn" + this.data.img_json.dataList[i].imgPath.replace(/\/medium/, ""))
+      full_imgurl.push("http://（收到中央气象局警告，链接已删除）" + this.data.img_json.dataList[i].imgPath.replace(/\/medium/, ""))
     }
     //console.log(full_imgurl)
     //console.log(this.data.img_num)
@@ -103,7 +103,7 @@ Page({
     //console.log(this.data.img_num)
     var imgurl = this.data.img_json.dataList[this.data.img_num_max - this.data.img_num].imgPath
     this.setData({
-      imgsrc: "http://image.nmc.cn" + imgurl
+      imgsrc: "http://（收到中央气象局警告，链接已删除）" + imgurl
     })
   },
 })
