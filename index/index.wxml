@@ -13,10 +13,9 @@
     <view class="page__bd_spacing">
       <button type="default" bindtap="openList">云图类别</button>
       <view class="page__desc">
-        <view>小图平均一张约350KB。</view>
+        <view>小图平均一张约540KB。</view>
         <view>点击图片可以查看高清大图。</view>
-        <view>风云系列卫星的大图约500KB。</view>
-        <view>其它卫星的大图约1.7MB~2.7MB。</view>
+        <view>大图平均一张约1.7MB~2.7MB。</view>
       </view>
     </view>
   </view>

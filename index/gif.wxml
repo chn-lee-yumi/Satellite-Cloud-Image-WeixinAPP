@@ -12,17 +12,19 @@
     <image src="{{imgsrc}}" style="width: 750rpx;" lazy-load="true" mode="widthFix" bindload="imageLoad" bindtap="imageTap"></image>
     <view class="page__bd_spacing">
       <view class="container">
-        <button class="weui-btn" type="primary" bindtap="playFY4A" disabled="{{is_playing}}">播放</button>
-        <slider show-value value="{{img_num}}" max="{{img_num_max}}" min="1" style="width: 430rpx; " bindchange="changeFY4A" />
-        <view class="page__desc ">点击播放或拖动滑块可以看不同时间的云图。</view>
-        <view class="page__desc ">注：一张图片约66KB，第一次播放画面可能会闪烁，因为图片下载需要时间。第二次或者第三次播放图片就流畅了。</view>
+        <button class="weui-btn" type="primary" bindtap="playPic" disabled="{{is_playing}}">播放</button>
+        <slider show-value value="{{img_num}}" max="{{img_num_max}}" min="1" style="width: 430rpx; " bindchange="changePic" />
+      </view>
+      <view class="page__desc">
+        <view>点击播放或拖动滑块可以看最近24小时的云图。</view>
+        <view>注：一张图片约540KB（所有图片共约26MB），因为图片下载需要时间，前几次播放画面会闪烁，等图片下载完毕再播放就流畅了。</view>
       </view>
     </view>
   </view>
-  <view class="page__ft ">
+  <view class="page__ft">
     <view>作者: CHN-Lee-Yumi</view>
     <view>License: GPL-3.0</view>
     <view>GitHub: chn-lee-yumi/Satillite-Cloud-Image-WeixinAPP</view>
-    <view>数据来源：</view>
+    <view>数据来源：国家卫星气象中心</view>
   </view>
 </view>
