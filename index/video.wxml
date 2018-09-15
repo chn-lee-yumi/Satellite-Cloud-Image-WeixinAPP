@@ -1,6 +1,7 @@
 <!--index/video.wxml-->
 <view class="page">
   <view class="page__bd">
+    <view class="page__desc">注：当前版本视频播放可能较卡，正在优化当中。</view>
     <view class="page__desc">最近72小时中国区视频（视频大小约58M）</view>
     <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.china.72h.mp4?v={{time}}"></video>
     <view class="page__desc">最近72小时全圆盘视频（视频大小约41M）</view>

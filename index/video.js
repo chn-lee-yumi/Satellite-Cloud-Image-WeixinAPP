@@ -1,4 +1,13 @@
 // index/video.js
+/*
+TODO: 压缩视频，优化观看效果。
+
+<video style="width: 750rpx;" src="http://hk.gcc.ac.cn/CLOUDIMAGE/FY4A.china.72h.mp4?v={{time}}"></video>
+<video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.disk.72h.mp4?v={{time}}"></video>
+
+http://hk.gcc.ac.cn/CLOUDIMAGE/FY4A.china.72h.mp4?v={{time}}
+http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.china.72h.mp4?v={{time}}
+*/
 Page({
 
   /**
@@ -11,8 +20,10 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-
+  onLoad: function (options) {
+    this.setData({
+      time: Math.round(new Date().getTime() / 600000)
+    })
   },
 
   /**
@@ -26,9 +37,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.setData({
-      time: Math.round(new Date().getTime() / 600000)
-    })
+
   },
 
   /**

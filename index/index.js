@@ -13,13 +13,14 @@ Page({
   },
 
   onLoad: function() {
-    this.refresh()
+    //this.refresh()
   },
 
   onShow: function() {
     this.setData({
       time: Math.round(new Date().getTime() / 300000) //5min
     })
+    this.refresh()
   },
 
   imageLoad: function(event) {
@@ -61,7 +62,6 @@ Page({
   imageTap: function(event) { //大图链接
     switch (this.data.img_name) {
       case "FY4A中国区": //无大图
-        //break;
       case "FY4A圆盘图": //无大图
         wx.previewImage({
           current: this.data.imgsrc,

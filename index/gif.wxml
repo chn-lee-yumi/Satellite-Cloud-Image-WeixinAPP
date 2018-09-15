@@ -1,6 +1,6 @@
 <view class="page">
   <view class="page__hd">
-    <view class="page__title">{{img_name}}</view>
+    <!--<view class="page__title">{{img_name}}</view>-->
   </view>
   <view class="page__bd">
     <view wx:if="{{!img_load_complete}}">
@@ -16,8 +16,9 @@
         <slider show-value value="{{img_num}}" max="{{img_num_max}}" min="1" style="width: 430rpx; " bindchange="changePic" />
       </view>
       <view class="page__desc">
-        <view>点击播放或拖动滑块可以看最近24小时的云图。</view>
-        <view>注：一张图片约540KB（所有图片共约26MB），因为图片下载需要时间，前几次播放画面会闪烁，等图片下载完毕再播放就流畅了。</view>
+        <view>云图类别：{{img_name}}</view>
+        <view>点击播放或拖动滑块可以看最近48小时的云图。</view>
+        <view>注：一张图片约172KB（所有图片共约8MB），因为图片下载需要时间，前一次播放画面会闪烁，第二次播放就流畅了。</view>
       </view>
     </view>
   </view>
