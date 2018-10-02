@@ -21,9 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      time: Math.round(new Date().getTime() / 600000)
-    })
+
   },
 
   /**
@@ -36,8 +34,10 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
+  onShow: function () {
+    this.setData({
+      time: Math.round(new Date().getTime() / 600000)
+    })
   },
 
   /**
