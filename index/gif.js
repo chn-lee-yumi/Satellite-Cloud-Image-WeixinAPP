@@ -1,5 +1,6 @@
+//TODO：云函数优化
+
 const app = getApp()
-const hotapp = require('../utils/hotapp.js')
 
 //图片接口
 //const FY2_api = "http://www.nsmc.org.cn/NSMC/datalist/fy2_color.txt" //图像列表接口
@@ -33,7 +34,7 @@ Page({
     imgsrc: "",
     img_load_complete: false,
     img_display: "none",
-    loading_tips:"正在获取图片列表……",
+    loading_tips: "正在获取图片列表……",
     img_name: "风云二号 红外一（彩色）云图",
     img_num: 1,
     img_num_max: 1,
@@ -43,25 +44,23 @@ Page({
 
   onLoad: function() { //TODO:可能存在一个小时后画面不刷新的问题
     var that = this
-    hotapp.request({
-      useProxy: true,
-      url: FY2_api,
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'proxy',
+      // 传给云函数的参数
+      data: {
+        url: FY2_api,
+      },
       success: function(res) {
-        //console.log(res.data)
-        //console.log(res.data.split(/,\s\s/,48))
-        /*var list = res.data.split(/,\s\s/, 72)
-        var list2 = [] //隔一张抽一张
-        for (var i = 0; i < that.data.img_num_max; i++) {
-          list2.push(list[i * 2])
-        }*/
-        var list = res.data.split(/,\s\s/)
+        console.log(res.result) // 3
+        var list = res.result.body.split(/,\s\s/)
         var list2 = [] //筛选出需要的图片
         var img_num = 0
         for (var tmp_url in list) {
           if (list[tmp_url].indexOf(FY2_txt) != -1) {
             list2.push(list[tmp_url])
             img_num++
-            //console.log(list[tmp_url])
+            console.log(list[tmp_url])
           }
         }
         console.log(img_num)
@@ -71,7 +70,7 @@ Page({
           img_num: 48, //图片数量太多会导致切换时闪烁
           img_num_max: 48,
           img_list: list2,
-          loading_tips:"正在下载图片……"
+          loading_tips: "正在下载图片……"
           //imgsrc: FY2_url + res.data.split(/,\s\s/, 48)[0]
         })
         that.refresh() //刷新图片
@@ -88,8 +87,10 @@ Page({
             img_display: "flex"
           })
         }, 48 * 125 + 100)
-      }
+      },
+      fail: console.error
     })
+
   },
 
   onShareAppMessage(options) {

@@ -11,7 +11,8 @@
     </view>
     <image src="{{imgsrc}}" style="width: 750rpx;" lazy-load="true" mode="widthFix" bindload="imageLoad" bindtap="imageTap"></image>
     <view class="page__bd_spacing">
-      <button type="default" bindtap="openList">云图类别</button>
+      <button type="default" bindtap="openList">查看区域图</button>
+      <button type="default" bindtap="openListCircle">查看圆盘图</button>
       <view class="page__desc">
         <view>小图平均一张约540KB。</view>
         <view>点击图片可以查看高清大图。</view>
@@ -22,7 +23,7 @@
   <view class="page__ft">
     <view>作者: CHN-Lee-Yumi</view>
     <view>License: GPL-3.0</view>
-    <view>GitHub: chn-lee-yumi/Satillite-Cloud-Image-WeixinAPP</view>
+    <view>GitHub: chn-lee-yumi/Satellite-Cloud-Image-WeixinAPP</view>
     <view>数据来源：国家卫星气象中心、交通部中央气象局、美国国家海洋和大气管理局</view>
   </view>
 </view>

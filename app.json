@@ -31,5 +31,6 @@
       }
     ],
     "position": "top"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

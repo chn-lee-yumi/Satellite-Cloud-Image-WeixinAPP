@@ -1,5 +1,4 @@
 const app = getApp()
-const hotapp = require('../utils/hotapp.js')
 
 /*TODO:
  */
@@ -13,14 +12,17 @@ Page({
   },
 
   onLoad: function() {
-    //this.refresh()
-  },
-
-  onShow: function() {
     this.setData({
       time: Math.round(new Date().getTime() / 300000) //5min
     })
     this.refresh()
+  },
+
+  onShow: function() {
+    // this.setData({
+    //   time: Math.round(new Date().getTime() / 300000) //5min
+    // })
+    // this.refresh()
   },
 
   imageLoad: function(event) {
@@ -30,10 +32,26 @@ Page({
     //console.log(event)
   },
 
-  openList: function() {
+  openList: function() { //查看区域图
     var that = this
-    //var itemList = ['FY4A真彩色', 'FY2E彩色云图', 'FY4A中国区高清', 'FY4A圆盘图高清', '更多卫星云图适配中……']
-    var itemList = ['FY4A中国区', 'FY4A圆盘图', 'Himawari8东亚', 'Himawari8圆盘图', 'GOES-WEST圆盘图'] //GOES16也称为GOES-WEST，这个就只写在注释里了
+    var itemList = ['FY4A中国区', 'FY2H“一带一路”区域', 'Himawari8东亚']
+    wx.showActionSheet({
+      itemList: itemList,
+      success: function(res) {
+        if (!res.cancel) {
+          that.setData({
+            img_name: itemList[res.tapIndex],
+            img_num: 0
+          })
+          that.refresh()
+        }
+      }
+    });
+  },
+
+  openListCircle: function() { //查看圆盘图
+    var that = this
+    var itemList = ['FY4A圆盘图', 'FY2H圆盘图', 'Himawari8圆盘图', 'GOES-WEST圆盘图'] //GOES16也称为GOES-WEST，这个就只写在注释里了
     wx.showActionSheet({
       itemList: itemList,
       success: function(res) {
@@ -55,14 +73,12 @@ Page({
     }
   },
 
-
-
-
-
   imageTap: function(event) { //大图链接
     switch (this.data.img_name) {
       case "FY4A中国区": //无大图
       case "FY4A圆盘图": //无大图
+      case "FY2H“一带一路”区域": //无大图
+      case "FY2H圆盘图": //无大图
         wx.previewImage({
           current: this.data.imgsrc,
           urls: [this.data.imgsrc]
@@ -95,55 +111,69 @@ Page({
     */
     const FY4A = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/FY4A_CHINA.JPG'
     const FY4A_circle_big = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/FY4A_DISK.JPG'
+    const FY2H = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY2H/GLL/FY2H_ETV_SEC_GLB.jpg'
+    const FY2H_circle = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY2H/NOM/FY2H_ETV_NOM.jpg'
     const Himawari8_circle = 'https://www.cwb.gov.tw/V7/js/ts0p_1000.js'
     const Himawari8_east_asia = 'https://www.cwb.gov.tw/V7/js/ts1p_1000.js'
     const GOES16_circle = 'https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/GEOCOLOR/678x678.jpg'
 
     var that = this
+    var old_imgsrc = this.data.imgsrc
+    var new_imgsrc = ''
     this.setData({ //显示加载中
       img_load_complete: false
     })
     //*****云图适配器*****
     switch (this.data.img_name) {
       case "FY4A中国区":
-        that.setData({
-          imgsrc: FY4A + "?v=" + this.data.time //图片末尾都加时间，为了防止缓存。时间5分钟变一次，防止浪费流量。
-        })
+        new_imgsrc = FY4A + "?v=" + this.data.time //图片末尾都加时间，为了防止缓存。时间5分钟变一次，防止浪费流量。
         break;
       case "FY4A圆盘图":
-        that.setData({
-          imgsrc: FY4A_circle_big + "?v=" + this.data.time
-        })
+        new_imgsrc = FY4A_circle_big + "?v=" + this.data.time
+        break;
+      case "FY2H“一带一路”区域":
+        new_imgsrc = FY2H + "?v=" + this.data.time
+        break;
+      case "FY2H圆盘图":
+        new_imgsrc = FY2H_circle + "?v=" + this.data.time
         break;
       case "Himawari8圆盘图":
-        hotapp.request({
-          useProxy: true,
-          url: Himawari8_circle,
-          success: function(res) {
-            var imgurl = "https://www.cwb.gov.tw" + res.data.slice(19, 86)
-            that.setData({
-              imgsrc: imgurl
-            })
+        wx.cloud.callFunction({
+          name: 'proxy',
+          data: {
+            url: Himawari8_circle,
           }
-        })
+        }).then(res => {
+          console.log(res)
+          that.setData({
+            imgsrc: "https://www.cwb.gov.tw" + res.result.body.slice(19, 86)
+          })
+        });
         break;
       case "Himawari8东亚":
-        hotapp.request({
-          useProxy: true,
-          url: Himawari8_east_asia,
-          success: function(res) {
-            var imgurl = "https://www.cwb.gov.tw" + res.data.slice(19, 86)
-            that.setData({
-              imgsrc: imgurl
-            })
+        wx.cloud.callFunction({
+          name: 'proxy',
+          data: {
+            url: Himawari8_east_asia,
           }
+        }).then(res => {
+          console.log(res)
+          that.setData({
+            imgsrc: "https://www.cwb.gov.tw" + res.result.body.slice(19, 86)
+          })
         })
         break;
       case "GOES-WEST圆盘图":
-        that.setData({
-          imgsrc: GOES16_circle + "?v=" + this.data.time
-        })
+        new_imgsrc = GOES16_circle + "?v=" + this.data.time
         break;
+    }
+    this.setData({
+      imgsrc: new_imgsrc
+    })
+    if (old_imgsrc == new_imgsrc) {
+      this.setData({ //图片链接不变会不会触发imageLoad
+        img_load_complete: true
+      })
     }
   }
 })

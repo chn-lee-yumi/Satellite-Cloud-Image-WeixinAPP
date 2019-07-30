@@ -1,7 +1,6 @@
 # 微信小程序：气象卫星云图
 - **微信小程序列表搜索“气象卫星云图”即可找到本程序。**  
-- 由于“卫星云图”这个名字已经被注册了，所以我就使用了这个名字。  
-- 因为wx.request不支持http，所以小程序采用了hotapp作为代理。如果要使用，需要先上hotapp注册，获得一个key，填入对应位置中。（我上传到GitHub的key是假的）
+- 由于“卫星云图”这个名字已经被注册了，所以我就使用了这个名字。 
 - 吐槽一下为什么我国那么多国家机构的网站都不支持HTTPS……
 
 ## 更新日志（主要功能更新）
@@ -13,12 +12,34 @@
 - v1.4.0 补齐上个版本缺失的功能。更新动图页面，使用风云二号彩色云图，来自国家卫星气象中心。  
 - v1.4.1 修复一些小BUG。更新动图页面，使用风云二号红外一（彩色）云图，来自国家卫星气象中心。更换动图的云图的原因是因为彩色云图太大，导致播放时会闪烁甚至看不到图片。猜测是微信小程序缓存的问题，只要减少图片数量，就不会闪烁。为了能看到更久远的云图，选用了比较小的红外一彩色云图。
 - v1.4.2 优化动图页面，现在会预加载图片。
+- v1.5.0 修复一些小bug。使用云函数作为代理进行http请求。新增FY2H的图像和视频，来自国家卫星气象中心。具体为：FY2H“一带一路”区域、FY2H圆盘图、“一带一路”区域最近24小时视频。由于itemList最大限制6个，所以我加了一个button，把云图分成了区域图和圆盘图。（这个不知道咋交互比较好）
+
+## 已知问题
+
+- 动图有时会闪，因为图片没缓存。不知道咋预加载（当前办法是后台播放一次）。欢迎提issue一起解决。
+- 播放大视频时会卡顿，暂无解决方法，如有欢迎提issue一起解决。（怀疑码率过大/视频体积过大导致的）
+- 代码有点冗余，有空再重构。此外有点不习惯2个空格的缩进，到时重构一起改了。
 
 ## 更多信息
-- 卫星介绍：http://fy4.nsmc.org.cn/portal/cn/satellite/index.html  
-- 卫星运行状态：http://fy4.nsmc.org.cn/portal/cn/operation/status.html  
-- 风云二号72小时动图：http://www.nsmc.org.cn/NSMC/Channels/100028.html  
-- 国家气象信息中心：http://data.cma.cn/site/index.html  
+
+|网站|地址|
+|---|---|
+|FY-2E/G云图|http://www.nsmc.org.cn/NSMC/Channels/100028.html|
+|FY-2F云图|http://www.nsmc.org.cn/NSMC/Channels/fy2f_topic.html|
+|FY-2H云图（一带一路）|http://fy4.nsmc.org.cn/nsmc/cn/theme/belt_and_road.html|
+|FY-3D主页|http://www.nsmc.org.cn/NSMC/Contents/FY3D.html|
+|FY-3D平面图（风云三号全球卫星影像）|https://satellite.nsmc.org.cn/PortalSite/Maps/ArssMaps.aspx|
+|FY-3D圆盘图（风云看地球）|https://fy4.nsmc.org.cn/mips/index.html|
+|FY-4A主页|http://fy4.nsmc.org.cn/portal/cn/theme/FY4A.html|
+|FY-4A云图（风云四号云图动画）|https://fy4.nsmc.org.cn/nsmc/cn/image/animation.html|
+|FY-4A实时数据（HDF格式）|http://fy4.nsmc.org.cn/data/cn/data/realtime.html|
+|卫星介绍|http://fy4.nsmc.org.cn/portal/cn/satellite/index.html|
+|卫星介绍（旧页面）|https://www.nsmc.org.cn/NSMC/Channels/100003.html|
+|国家卫星气象中心|https://www.nsmc.org.cn/NSMC/Home/Index.html|
+|中国气象数据网（可以下数据）|http://data.cma.cn/site/index.html|
+|风云卫星遥感数据服务网（可以下数据）|https://satellite.nsmc.org.cn/portalsite/default.aspx|
+|GIS气象数据综合展示|http://data.cma.cn/dataGis/gis.html|
+
 - 交通部中央气象局：https://www.cwb.gov.tw/V7/observe/satellite/Sat_TrueW.htm  
 - GOES-East Image Viewer：https://www.star.nesdis.noaa.gov/GOES/index.php  
 - http://www.ssd.noaa.gov/imagery/  
@@ -26,6 +47,5 @@
 - http://oiswww.eumetsat.org/IPPS/html/latestImages.html  
 - http://www.data.jma.go.jp/mscweb/data/himawari/index.html  
 - Meteosat实时图像：https://www.eumetsat.int/website/home/Images/RealTimeImages/index.html  
-- 其它网址：
-   - http://himawari8.nict.go.jp/  
-   - http://cimss.ssec.wisc.edu/goes/blog/archives/category/himawari-9  
+- http://himawari8.nict.go.jp/  
+- http://cimss.ssec.wisc.edu/goes/blog/archives/category/himawari-9  
