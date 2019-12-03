@@ -1,20 +1,26 @@
 <view class="page">
-  <view class="page__hd">
-    <view class="page__title">小程序介绍：气象卫星云图</view>
-  </view>
-  <view class="page__bd page__bd_spacing">
-    <view class="page__desc" style="text-indent:2em;">
-      <view>这个小程序将一些气象卫星的云图进行了汇总，你可以在这里看到不同卫星的不同图像。所有图片均可点击放大，长按保存。图片为高清图，请注意流量。</view>
-      <view>这个小程序没有使用后端服务器，所有图像链接均为直链，直接链接到对应机构的网站上。所有的数据来源（机构）都会在对应页面下方列出。</view>
-      <view>图像链接是如何获取的？部分图像是一个静态链接，其来源网站会定期更新链接对应的图片。部分图像（或图像列表）需要通过URL接口来获取链接，这些接口都是作者在对应网站上通过F12调试工具找到的。关于详细的接口地址，可以查看本小程序源码。</view>
-      <view>在此吐槽下，国内相关机构的网站全是http的，导致我无法使用wx.request直接请求（微信小程序规定只能请求https的页面）。不过现在微信小程序出了云函数，可以走云函数代理出去，给微信一个好评！</view>
-      <view>另外说明一下，所有的彩色云图都是单通道或多通道加固定背景合成的，并非真正的普通相机拍出来的可见光效果。地球大陆背景是有另外的图片叠加上去的，城市的夜光也是。</view>
-      <view>作者制作这个小程序纯属个人兴趣爱好，因为平时喜欢看卫星云图，而手机查看不够方便，故将其写成小程序，方便大家查看。代码以GPLv3协议开源，托管在GitHub上。</view>
+
+    <!-- 标题 -->
+    <view class="page__hd">
+        <view class="page__title">小程序介绍：气象卫星云图</view>
     </view>
-  </view>
-  <view class="page__ft">
-    <view>作者: CHN-Lee-Yumi</view>
-    <view>License: GPL-3.0</view>
-    <view>GitHub: chn-lee-yumi/Satellite-Cloud-Image-WeixinAPP</view>
-  </view>
+
+    <!-- 正文 -->
+    <view class="page__bd page__bd_spacing">
+        <view class="page__desc" style="text-indent:2em;">
+            <view>这个小程序将一些气象卫星的云图进行了汇总，你可以在这里看到不同卫星的不同图像。所有图片均可点击放大，长按保存。图片为高清图，请注意流量。</view>
+            <view>这个小程序没有使用后端服务器，所有图像链接均为直链，直接链接到对应机构的网站上。所有的数据来源（机构）都会在对应页面下方列出。</view>
+            <view>图像链接是如何获取的？部分图像是一个静态链接，其来源网站会定期更新链接对应的图片。部分图像（或图像列表）需要通过URL接口来获取链接，这些接口都是作者在对应网站上通过F12调试工具找到的。关于详细的接口地址，可以查看本小程序源码。</view>
+            <view>在此吐槽下，国内相关机构的网站全是http的，导致我无法使用wx.request直接请求（微信小程序规定只能请求https的页面）。不过现在微信小程序出了云函数，可以走云函数代理出去，给微信一个好评！</view>
+            <view>另外说明一下，所有的彩色云图都是单通道或多通道加固定背景合成的，并非真正的普通相机拍出来的可见光效果。地球大陆背景是有另外的图片叠加上去的，城市的夜光也是。</view>
+            <view>作者制作这个小程序纯属个人兴趣爱好，因为平时喜欢看卫星云图，而手机查看不够方便，故将其写成小程序，方便大家查看。代码以GPLv3协议开源，托管在GitHub上。</view>
+        </view>
+    </view>
+
+    <!-- 页脚 -->
+    <view class="weui-footer weui-footer__text">
+        <view>作者: CHN-Lee-Yumi</view>
+        <view>License: GPL-3.0</view>
+        <view>GitHub: chn-lee-yumi/Satellite-Cloud-Image-WeixinAPP</view>
+    </view>
 </view>

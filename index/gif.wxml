@@ -1,31 +1,40 @@
 <view class="page">
-  <view class="page__hd">
-    <!--<view class="page__title">{{img_name}}</view>-->
-  </view>
-  <view class="page__bd">
-    <view wx:if="{{!img_load_complete}}">
-      <view class="weui-loadmore">
-        <view class="weui-loading"></view>
-        <view class="weui-loadmore__tips">{{loading_tips}}</view>
-      </view>
+
+    <view class="page__bd">
+
+        <!-- 加载的圈圈 -->
+        <view wx:if="{{!img_load_complete}}">
+            <view class="weui-loadmore">
+                <view class="weui-loading"></view>
+                <view class="weui-loadmore__tips">{{loading_tips}}</view>
+            </view>
+        </view>
+
+        <!-- 图片 -->
+        <image src="{{imgsrc}}" style="width: 750rpx; display:{{img_display}}" mode="widthFix" bindtap="imageTap"></image>
+
+        <!-- 滑动条、按钮 -->
+        <view class="container">
+            <button class="weui-btn" type="primary" bindtap="playPic" disabled="{{is_playing}}" style="width: 170rpx;" wx:if="{{img_load_complete}}">播放</button>
+            <slider show-value value="{{img_num}}" max="{{img_num_max}}" min="1" style="width: 440rpx; " bindchanging="changePic" bindchange="changePic" />
+        </view>
+
+        <!-- 说明文字 -->
+        <view class="page__bd_spacing">
+            <view class="page__desc">
+                <view>云图类别：{{img_name}}</view>
+                <view>点击播放或拖动滑块可以看最近48小时的云图。</view>
+                <view>注：一张图片约172KB（所有图片共约8MB）。</view>
+            </view>
+
+        </view>
     </view>
-    <image src="{{imgsrc}}" style="width: 750rpx; display:{{img_display}}" lazy-load="true" mode="widthFix" bindload="imageLoad" bindtap="imageTap"></image>
-    <view class="page__bd_spacing">
-      <view class="container" style="justify-content: center; margin:5px;">
-        <button class="weui_btn" type="primary" bindtap="playPic" disabled="{{is_playing}}" style="width: 170rpx;" wx:if="{{img_load_complete}}">播放</button>
-        <slider show-value value="{{img_num}}" max="{{img_num_max}}" min="1" style="width: 440rpx; " bindchange="changePic" />
-      </view>
-      <view class="page__desc">
-        <view>云图类别：{{img_name}}</view>
-        <view>点击播放或拖动滑块可以看最近48小时的云图。</view>
-        <view>注：一张图片约172KB（所有图片共约8MB）。</view>
-      </view>
+
+    <!-- 页脚 -->
+    <view class="weui-footer weui-footer__text">
+        <view>作者: CHN-Lee-Yumi</view>
+        <view>License: GPL-3.0</view>
+        <view>GitHub: chn-lee-yumi/Satellite-Cloud-Image-WeixinAPP</view>
+        <view>数据来源：国家卫星气象中心</view>
     </view>
-  </view>
-  <view class="page__ft">
-    <view>作者: CHN-Lee-Yumi</view>
-    <view>License: GPL-3.0</view>
-    <view>GitHub: chn-lee-yumi/Satellite-Cloud-Image-WeixinAPP</view>
-    <view>数据来源：国家卫星气象中心</view>
-  </view>
 </view>

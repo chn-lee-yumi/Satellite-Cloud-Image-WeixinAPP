@@ -1,19 +1,25 @@
-<!--index/video.wxml-->
 <view class="page">
-  <view class="page__bd">
-    <view class="page__desc">注：当前版本视频播放可能较卡，正在优化当中。</view>
-    <view class="page__desc">“一带一路”区域最近24小时视频（视频大小约3.5M）</view>
-    <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY2H/VIDEO/FY2H.br.24h.mp4?v={{time}}"></video>
-    <view class="page__desc">最近72小时中国区视频（视频大小约58M）</view>
-    <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.china.72h.mp4?v={{time}}"></video>
-    <view class="page__desc">最近72小时全圆盘视频（视频大小约41M）</view>
-    <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.disk.72h.mp4?v={{time}}"></video>
-  </view>
-  <view class="page__ft">
-    <view>作者: CHN-Lee-Yumi</view>
-    <view>License: GPL-3.0</view>
-    <view>GitHub: chn-lee-yumi/Satellite-Cloud-Image-WeixinAPP</view>
-    <view>数据来源：国家卫星气象中心</view>
-  </view>
-</view>
 
+    <!-- 视频播放页面 -->
+    <view class="page__bd">
+        <view class="page__desc">注：当前版本视频播放可能较卡，正在优化当中。</view>
+
+        <view class="page__desc">“一带一路”区域最近24小时视频（视频大小约3.5M）</view>
+        <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY2H/VIDEO/FY2H.br.24h.mp4?t={{cache_time}}"></video>
+
+        <view class="page__desc">最近72小时中国区视频（视频大小约58M）</view>
+        <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.china.72h.mp4?t={{cache_time}}"></video>
+
+        <view class="page__desc">最近72小时全圆盘视频（视频大小约41M）</view>
+        <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.disk.72h.mp4?t={{cache_time}}"></video>
+
+    </view>
+
+    <!-- 页脚 -->
+    <view class="weui-footer weui-footer__text">
+        <view>作者: CHN-Lee-Yumi</view>
+        <view>License: GPL-3.0</view>
+        <view>GitHub: chn-lee-yumi/Satellite-Cloud-Image-WeixinAPP</view>
+        <view>数据来源：国家卫星气象中心</view>
+    </view>
+</view>

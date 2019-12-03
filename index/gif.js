@@ -1,18 +1,23 @@
-//TODO：云函数优化
-
-const app = getApp()
-
-//图片接口
-//const FY2_api = "http://www.nsmc.org.cn/NSMC/datalist/fy2_color.txt" //图像列表接口
-//const FY2_url = "http://img.nsmc.org.cn/CLOUDIMAGE/FY2/WXCL/" //URL前缀
-const FY2_api = "http://www.nsmc.org.cn/NSMC/datalist/fy2g/fy2g_lan.txt" //图像列表接口
-const FY2_url = "http://img.nsmc.org.cn/CLOUDIMAGE/FY2G/lan/" //URL前缀
-const FY2_txt = "FY2G_LAN_CLC_GRA_" //图片名称前缀
-/*
+/* 云图动画
 Himawari8的图片质量更好，加载速度较慢。
 风云二号图片质量较差，加载速度较快。
 考虑到用户体验，且Himawari8云图已在实时云图界面出现，这里选择风云二号。
 */
+const app = getApp()
+var request = require('../utils/request.js')
+/* TODO
+解决频闪的问题
+*/
+
+//图片接口
+//const FY2_api = "http://www.nsmc.org.cn/NSMC/datalist/fy2_color.txt" //彩色图像列表接口（图片太大，暂不使用）
+//const FY2_url = "http://img.nsmc.org.cn/CLOUDIMAGE/FY2/WXCL/" //URL前缀
+const FY2_api = "http://www.nsmc.org.cn/NSMC/datalist/fy2g/fy2g_lan.txt" //图像列表接口
+const FY2_url = "http://img.nsmc.org.cn/CLOUDIMAGE/FY2G/lan/" //URL前缀
+const FY2_txt = "FY2G_LAN_CLC_GRA_" //图片名称前缀
+const IMG_NUM = 48 //图片最大数量
+const PLAY_INTERVAL = 125 //播放图片的切换间隔
+
 
 /*
 其它数据：
@@ -30,142 +35,130 @@ Himawari8图片列表：https://www.cwb.gov.tw/V7/observe/satellite/Sat_TrueEA.h
 */
 
 Page({
-  data: {
-    imgsrc: "",
-    img_load_complete: false,
-    img_display: "none",
-    loading_tips: "正在获取图片列表……",
-    img_name: "风云二号 红外一（彩色）云图",
-    img_num: 1,
-    img_num_max: 1,
-    img_list: [],
-    is_playing: false
-  },
+    data: {
+        imgsrc: "", //图片url
+        img_load_complete: true, //图片是否加载完成。false会转圈圈，true则圈圈消失
+        img_display: "none", //是否显示图片。图片加载完成前为none，加载完成后为flex。
+        loading_tips: "正在获取图片列表……", //图片加载的提示
+        img_name: "风云二号 红外一（彩色）云图", //云图类别
+        img_num: 1, //当前图片序号
+        img_num_max: IMG_NUM, //图片最大序号
+        img_list: [], //图片url列表
+        is_playing: false, //是否正在播放，true则播放按钮会被disable
+        last_cache_time: 0 //上一次的缓存时间，全局变量
+    },
 
-  onLoad: function() { //TODO:可能存在一个小时后画面不刷新的问题
-    var that = this
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'proxy',
-      // 传给云函数的参数
-      data: {
-        url: FY2_api,
-      },
-      success: function(res) {
-        console.log(res.result) // 3
-        var list = res.result.body.split(/,\s\s/)
-        var list2 = [] //筛选出需要的图片
-        var img_num = 0
-        for (var tmp_url in list) {
-          if (list[tmp_url].indexOf(FY2_txt) != -1) {
-            list2.push(list[tmp_url])
-            img_num++
-            console.log(list[tmp_url])
-          }
+    onShow: function() { //判断是否超过缓存时间，如果超过，则请求图片列表，然后加载图片
+        var cache_time = Math.round(new Date().getTime() / 300000) //与时间相关的参数，每5分钟+1，以防止缓存
+        console.log(this.data.last_cache_time, cache_time)
+        //没超过缓存时间或正在刷新则返回
+        if (cache_time <= this.data.last_cache_time || this.data.img_load_complete == false) {
+            return
         }
-        console.log(img_num)
-        that.setData({
-          //img_num: img_num,
-          //img_num_max: img_num,
-          img_num: 48, //图片数量太多会导致切换时闪烁
-          img_num_max: 48,
-          img_list: list2,
-          loading_tips: "正在下载图片……"
-          //imgsrc: FY2_url + res.data.split(/,\s\s/, 48)[0]
+        //加载图片前隐藏图片
+        this.setData({
+            img_load_complete: false,
+            img_display: "none",
+            img_num: 1
         })
-        that.refresh() //刷新图片
-        /*
-        that.setData({
-          img_load_complete: true,
-          img_display: "flex"
+        //调用云函数获取图片列表
+        var that = this
+        request.callCloudFunction({
+            // 云函数名称
+            name: 'proxy',
+            // 传给云函数的参数
+            data: {
+                url: FY2_api,
+            }
+        }).then(res => {
+            console.log(res.result)
+            that.data.last_cache_time = cache_time // 更新缓存时间
+            var list_source = res.result.body.split(/,\s\s/) //所有图片的列表
+            var list_seleted = [] //需要的图片的列表
+            var img_num = 0
+            //筛选出需要的图片
+            for (var tmp_url in list_source) {
+                if (list_source[tmp_url].indexOf(FY2_txt) != -1) {
+                    list_seleted.push(list_source[tmp_url])
+                    img_num++
+                }
+            }
+            console.log(img_num) //打印图片数量
+            that.setData({
+                img_num: 1,
+                img_num_max: IMG_NUM, //图片数量太多会导致切换时闪烁，24比较正常。如果改为img_num则为最大数量。
+                img_list: list_seleted,
+                loading_tips: "正在下载图片……"
+            })
+            //预播放一次，相当于预加载
+            that.playPic()
+            setTimeout(function() {
+                that.setData({
+                    img_load_complete: true,
+                    img_display: "flex"
+                })
+            }, IMG_NUM * PLAY_INTERVAL + 100)
+        }).catch(err => {
+            console.log(err)
+            wx.showToast({
+                title: '获取图片列表失败，请重新打开动图页面',
+                icon: 'none',
+                duration: 3000
+            })
         })
-        */
-        that.playPic() //预播放一次，相当于预加载
+    },
+
+    onShareAppMessage(options) {
+        return {
+            title: '台风来了吗？看看云图吧！',
+            path: '/index/index'
+        }
+    },
+
+    doSetTimeout: function(i) { //使用定时器播放图片，i为图片序号 TODO:允许停止
+        var that = this
         setTimeout(function() {
-          that.setData({
-            img_load_complete: true,
-            img_display: "flex"
-          })
-        }, 48 * 125 + 100)
-      },
-      fail: console.error
-    })
+            that.setData({
+                img_num: i
+            })
+            that.refresh()
+            if (i == that.data.img_num_max) {
+                that.setData({
+                    is_playing: false
+                })
+            }
+        }, PLAY_INTERVAL * i);
+    },
 
-  },
-
-  onShareAppMessage(options) {
-    return {
-      title: '台风来了吗？看看云图吧！',
-      path: '/index/index'
-    }
-  },
-
-  imageLoad: function(event) {
-    /*
-    this.setData({
-      img_load_complete: true
-    })*/
-    console.log(event)
-  },
-
-  doSetTimeout: function(i) {
-    var that = this
-    setTimeout(function() {
-      console.log(i);
-      that.setData({
-        img_num: i
-      })
-      that.refresh()
-      if (i == that.data.img_num_max) {
-        that.setData({
-          is_playing: false
+    playPic: function(event) { //播放图片
+        //TODO: 解决图片播放闪烁的问题
+        for (var i = 1; i <= this.data.img_num_max; ++i)
+            this.doSetTimeout(i); //使用定时器来播放
+        this.setData({
+            is_playing: true
         })
-      }
-    }, 125 * i);
-  },
 
-  playPic: function(event) {
-    //TODO: 解决图片播放闪烁的问题（可能需要先下载图片，再播放）
-    //console.log("playPic")
-    for (var i = 1; i <= this.data.img_num_max; ++i)
-      this.doSetTimeout(i);
-    this.setData({
-      is_playing: true
-    })
-  },
+    },
 
-  changePic: function(event) {
-    //console.log(event.detail.value)
-    this.setData({
-      img_num: event.detail.value
-    })
-    this.refresh()
-  },
+    imageTap: function(event) { //显示大图
+        wx.previewImage({
+            current: this.data.imgsrc, //没有大图
+            urls: [this.data.imgsrc] //仅显示一张图片，如果是多张图片，微信会全部重新下载，这样很浪费用户流量
+        })
+    },
 
-  imageTap: function(event) {
-    /*//不再采用大图显示所有图片的方式，因为微信会重新下载所有图片，这样很消耗流量。
-    var full_imgurl = []
-    for (var i = this.data.img_num_max - 1; i >= 0; i--) {
-      var imgurl = this.data.img_list[i]
-      full_imgurl.push(FY2_url + imgurl) //没有小图，原本显示的就是大图
-    }
-    //console.log(full_imgurl)
-    wx.previewImage({
-      current: full_imgurl[this.data.img_num - 1],
-      urls: full_imgurl
-    })*/
-    wx.previewImage({
-      current: this.data.imgsrc,
-      urls: [this.data.imgsrc]
-    })
-  },
+    changePic: function(event) { //拖动slider时修改图片
+        console.log(event)
+        this.setData({
+            img_num: event.detail.value
+        })
+        this.refresh()
+    },
 
-  refresh: function(event) {
-    //console.log(this.data.img_json.dataList)
-    //console.log(this.data.img_num)
-    var imgurl = this.data.img_list[this.data.img_num_max - this.data.img_num]
-    this.setData({
-      imgsrc: FY2_url + imgurl
-    })
-  },
+    refresh: function(event) { //刷新图片
+        var imgurl = this.data.img_list[this.data.img_num_max - this.data.img_num]
+        this.setData({
+            imgsrc: FY2_url + imgurl
+        })
+    },
 })
