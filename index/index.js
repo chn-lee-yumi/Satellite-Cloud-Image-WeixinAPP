@@ -2,6 +2,7 @@
 5分钟刷新一次
 */
 const app = getApp()
+const CACHE_TIME = 300000 //缓存时间，单位毫秒。300000ms=5分钟
 var request = require('../utils/request.js')
 
 Page({
@@ -108,7 +109,7 @@ Page({
         //准备变量
         var old_img_src = this.data.img_src //旧url，后面会和新url做判断，如果相同，则图片算直接加载完毕
         var new_img_src = '' //新url
-        var cache_time = Math.round(new Date().getTime() / 300000) //与时间相关的参数，每5分钟+1。作为参数附带在访问图片后面（?t=xxxxxx），以防止缓存
+        var cache_time = Math.round(new Date().getTime() / CACHE_TIME) //与时间相关的参数，每过CACHE_TIME增加1。作为参数附带在访问图片后面（?t=xxxxxx），以防止缓存
 
         //显示加载中
         this.setData({
@@ -137,9 +138,10 @@ Page({
 
             case "Himawari8圆盘图":
                 request.callCloudFunction({
-                    name: 'proxy',
+                    name: 'proxy', //云函数的名字
                     data: {
                         url: Himawari8_circle,
+                        cache: true //云函数的参数，表示启用缓存（详见云函数代码functions/proxy/index.js）
                     }
                 }).then(res => {
                     console.log(res)
@@ -161,6 +163,7 @@ Page({
                     name: 'proxy',
                     data: {
                         url: Himawari8_east_asia,
+                        cache: true
                     }
                 }).then(res => {
                     console.log(res)

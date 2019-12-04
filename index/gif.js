@@ -4,6 +4,7 @@ Himawari8的图片质量更好，加载速度较慢。
 考虑到用户体验，且Himawari8云图已在实时云图界面出现，这里选择风云二号。
 */
 const app = getApp()
+const CACHE_TIME = 300000 //缓存时间，单位毫秒。300000ms=5分钟
 var request = require('../utils/request.js')
 /* TODO
 解决频闪的问题
@@ -49,7 +50,7 @@ Page({
     },
 
     onShow: function() { //判断是否超过缓存时间，如果超过，则请求图片列表，然后加载图片
-        var cache_time = Math.round(new Date().getTime() / 300000) //与时间相关的参数，每5分钟+1，以防止缓存
+        var cache_time = Math.round(new Date().getTime() / CACHE_TIME) //与时间相关的参数，每过CACHE_TIME增加1，以防止缓存
         console.log(this.data.last_cache_time, cache_time)
         //没超过缓存时间或正在刷新则返回
         if (cache_time <= this.data.last_cache_time || this.data.img_load_complete == false) {
@@ -69,6 +70,7 @@ Page({
             // 传给云函数的参数
             data: {
                 url: FY2_api,
+                cache: true
             }
         }).then(res => {
             console.log(res.result)

@@ -1,0 +1,9 @@
+[
+  {
+    "name": "proxy",
+    "value": {
+      "url": "https://www.cwb.gov.tw/V7/js/ts1p_1000.js",
+      "cache": true
+    }
+  }
+]

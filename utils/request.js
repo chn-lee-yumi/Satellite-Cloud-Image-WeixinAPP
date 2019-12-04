@@ -19,7 +19,7 @@ function callCloudFunctionRetry(obj, times) {
                     times--;
                     setTimeout(function() {
                         attempt()
-                    }, 1000);
+                    }, 500); //0.5s后重试
                 }
             });
         };
