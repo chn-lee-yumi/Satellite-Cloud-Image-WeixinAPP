@@ -30,18 +30,15 @@
 
 |网站|地址|
 |---|---|
-|FY-2E/G云图|http://www.nsmc.org.cn/NSMC/Channels/100028.html|
-|FY-2F云图|http://www.nsmc.org.cn/NSMC/Channels/fy2f_topic.html|
+|国家卫星气象中心 卫星云图|http://www.nsmc.org.cn/nsmc/cn/image/index.html|
 |FY-2H云图（一带一路）|http://fy4.nsmc.org.cn/nsmc/cn/theme/belt_and_road.html|
-|FY-3D主页|http://www.nsmc.org.cn/NSMC/Contents/FY3D.html|
 |FY-3D平面图（风云三号全球卫星影像）|https://satellite.nsmc.org.cn/PortalSite/Maps/ArssMaps.aspx|
 |FY-3D圆盘图（风云看地球）|https://fy4.nsmc.org.cn/mips/index.html|
-|FY-4A主页|http://fy4.nsmc.org.cn/portal/cn/theme/FY4A.html|
+|FY-4A主页|https://fy4.nsmc.org.cn/nsmc/cn/theme/FY4A.html|
 |FY-4A云图（风云四号云图动画）|https://fy4.nsmc.org.cn/nsmc/cn/image/animation.html|
 |FY-4A实时数据（HDF格式）|http://fy4.nsmc.org.cn/data/cn/data/realtime.html|
-|卫星介绍|http://fy4.nsmc.org.cn/portal/cn/satellite/index.html|
-|卫星介绍（旧页面）|https://www.nsmc.org.cn/NSMC/Channels/100003.html|
-|国家卫星气象中心|https://www.nsmc.org.cn/NSMC/Home/Index.html|
+|卫星介绍|http://www.nsmc.org.cn/nsmc/cn/satellite/index.html|
+|国家卫星气象中心|https://www.nsmc.org.cn/nsmc/cn/home/index.html|
 |中国气象数据网（可以下数据）|http://data.cma.cn/site/index.html|
 |风云卫星遥感数据服务网（可以下数据）|https://satellite.nsmc.org.cn/portalsite/default.aspx|
 |GIS气象数据综合展示|http://data.cma.cn/dataGis/gis.html|
