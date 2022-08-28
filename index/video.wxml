@@ -1,17 +1,35 @@
 <view class="page">
 
+    <view class="page__hd">
+        <!-- 标题 -->
+        <view class="page__title">{{img_name}}</view>
+    </view>
+
     <!-- 视频播放页面 -->
     <view class="page__bd">
-        <view class="page__desc">注：当前版本视频播放可能较卡，正在优化当中。</view>
 
-        <view class="page__desc">“一带一路”区域最近72小时视频（视频大小约11M）</view>
-        <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY2H/VIDEO/FY2H.br.72h.mp4?t={{cache_time}}"></video>
+        <!-- 加载的圈圈 -->
+        <view wx:if="{{!img_load_complete}}">
+            <view class="weui-loadmore">
+                <view class="weui-loading"></view>
+                <view class="weui-loadmore__tips">正在获取最新图片……</view>
+            </view>
+        </view>
 
-        <view class="page__desc">最近72小时中国区视频（视频大小约58M）</view>
-        <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.china.72h.mp4?t={{cache_time}}"></video>
+        <!-- 图片 -->
+        <video src="{{img_src}}" controls="{{false}}" autoplay loop muted style="width: 750rpx; height: 750rpx;" mode="widthFix"></video>
 
-        <view class="page__desc">最近72小时全圆盘视频（视频大小约41M）</view>
-        <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.disk.72h.mp4?t={{cache_time}}"></video>
+        <!-- 说明文字 -->
+        <view class="page__bd_spacing page__desc">
+            <view>因为图片极大，可能需要加载半分钟才会动。请注意流量。</view>
+        </view>
+
+        <!-- 按钮 -->
+        <view class="button-sp-area">
+            <!--使用data-type传参数到openList函数，根据不同的data-type，来选择区域图或圆盘图-->
+            <button class="weui-btn mini-btn" size="mini" type="default" bindtap="openList" data-type="all">选择动图</button>
+            <button class="weui-btn mini-btn" size="mini" type="default" bindtap="refresh">刷新</button>
+        </view>
 
     </view>
 

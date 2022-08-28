@@ -19,7 +19,7 @@
 
         <!-- 按钮 -->
         <view class="button-sp-area">
-            <!--使用data-type传参数到openList函数，根据不同的type，来选择区域图或圆盘图-->
+            <!--使用data-type传参数到openList函数，根据不同的data-type，来选择区域图或圆盘图-->
             <button class="weui-btn mini-btn" size="mini" type="default" bindtap="openList" data-type="area">查看区域图</button>
             <button class="weui-btn mini-btn" size="mini" type="default" bindtap="openList" data-type="circle">查看圆盘图</button>
             <button class="weui-btn mini-btn" size="mini" type="default" bindtap="refresh">刷新</button>
@@ -27,9 +27,10 @@
 
         <!-- 说明文字 -->
         <view class="page__bd_spacing page__desc">
-            <view>小图平均一张约540KB。</view>
+            <view>小图平均一张约600KB。</view>
             <view>点击图片可以查看高清大图。</view>
-            <view>大图平均一张约1.7MB~2.7MB。</view>
+            <view>大图平均一张约2MB~3MB。</view>
+            <view style="color: red;">“卫星云图监测”小程序违反开源协议剽窃本项目代码甚至还加广告牟利，本人在此表示强烈谴责。因微信小程序维权途径针对个人开发者十分不友好，因此放弃维权。“卫星云图监测”的作者不讲码德，没有道德。我劝这位小伙子好自为之，好好反思。</view>
         </view>
     </view>
 
@@ -38,7 +39,7 @@
         <view>作者: CHN-Lee-Yumi</view>
         <view>License: GPL-3.0</view>
         <view>GitHub: chn-lee-yumi/Satellite-Cloud-Image-WeixinAPP</view>
-        <view>数据来源：国家卫星气象中心、交通部中央气象局、美国国家海洋和大气管理局</view>
+        <view>数据来源：国家卫星气象中心、美国国家海洋和大气管理局</view>
     </view>
 
 </view>

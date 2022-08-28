@@ -20,11 +20,7 @@
 - v1.5.0 修复一些小bug。使用云函数作为代理进行http请求。新增FY2H的图像和视频，来自国家卫星气象中心。具体为：FY2H“一带一路”区域、FY2H圆盘图、“一带一路”区域最近24小时视频。由于itemList最大限制6个，所以我加了一个button，把云图分成了区域图和圆盘图。（这个不知道咋交互比较好）
 - v2.0.0 代码重构。更新WeUI版本到2.0。
 - v2.0.1 云函数增强，增加缓存功能，提高请求效率。
-
-## 已知问题
-
-- **动图有时会闪，因为图片没缓存。不知道咋预加载（当前办法是后台播放一次）。欢迎提issue一起解决。**
-- **播放大视频时会卡顿，如有办法欢迎提issue一起解决。（怀疑码率过大/视频体积过大导致的）**（TODO：用node.js做服务端压缩视频）
+- v2.1.0 因为云函数开始收费，所以取消相关功能，包括原来的动图和Himawari8云图。取消“视频”，改为“动图”。新增闪电云图、FY3D云图、静止卫星全球云图。
 
 ## 更多信息
 
@@ -36,6 +32,7 @@
 |FY-3D圆盘图（风云看地球）|https://fy4.nsmc.org.cn/mips/index.html|
 |FY-4A主页|https://fy4.nsmc.org.cn/nsmc/cn/theme/FY4A.html|
 |FY-4A云图（风云四号云图动画）|https://fy4.nsmc.org.cn/nsmc/cn/image/animation.html|
+|FY-4A云图（风云四号云图视频）|https://fy4.nsmc.org.cn/nsmc/cn/image/video.html|
 |FY-4A实时数据（HDF格式）|http://fy4.nsmc.org.cn/data/cn/data/realtime.html|
 |卫星介绍|http://www.nsmc.org.cn/nsmc/cn/satellite/index.html|
 |国家卫星气象中心|https://www.nsmc.org.cn/nsmc/cn/home/index.html|
@@ -53,10 +50,3 @@
 - http://himawari8.nict.go.jp/  
 - http://cimss.ssec.wisc.edu/goes/blog/archives/category/himawari-9  
 
-## 部署说明
-
-由于小程序功能越来越多，开始使用[云开发](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)，所以小程序还需要部署服务端。不过云开发环境比较简单，只需做一些简单的初始化操作（需要在微信开发者工具下执行，建议阅读云开发入门文档，以完成下列操作）：
-
-1. 创建所有云函数（函数名为`functions`目录下的文件夹名字，目前只有一个云函数`proxy`）
-2. 上传所有云函数（右键函数名对应文件夹，上传并部署：云端安装依赖）
-3. 数据库创建集合：`proxy_cache`

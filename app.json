@@ -2,7 +2,6 @@
   "pages": [
     "index/index",
     "index/video",
-    "index/gif",
     "index/info"
   ],
   "window": {
@@ -19,10 +18,6 @@
       },
       {
         "text": "动图",
-        "pagePath": "index/gif"
-      },
-      {
-        "text": "视频",
         "pagePath": "index/video"
       },
       {
