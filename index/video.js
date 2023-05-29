@@ -1,5 +1,5 @@
 /*
-TODO: 目前视频播放较卡，怀疑码率太高。打算使用node.js服务器压缩视频，优化观看效果。
+TODO: 目前视频播放较卡，怀疑码率太高。
 
 <video style="width: 750rpx;" src="http://hk.gcc.ac.cn/CLOUDIMAGE/FY4A.china.72h.mp4?v={{time}}"></video>
 <video style="width: 750rpx;" src="http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.disk.72h.mp4?v={{time}}"></video>
@@ -16,7 +16,7 @@ Page({
     data: {
         img_src: "", //图片url
         img_load_complete: true, //图片是否加载完成。false会转圈圈，true则圈圈消失
-        img_name: "“一带一路”区域72小时（约11M）", //图片名字（标题）
+        img_name: "“一带一路”区域72小时（约12M）", //图片名字（标题）
     },
 
     /**
@@ -31,8 +31,11 @@ Page({
         //根据button的data-type来决定显示哪个列表
         var itemList
         switch (event.target.dataset.type) {
-            case 'all':
-                itemList = ['“一带一路”区域72小时（约11M）', '72小时中国区（约35M）', '72小时全圆盘（约30M）', '72小时闪电云图（约26M）', "72小时静止卫星全球云图（约16M）"]
+            case 'area':
+                itemList = ['“一带一路”区域72小时（约12M）', '72小时FY4B中国区（约41M）', '72小时FY4A中国区（约36M）', '72小时闪电云图（约30M）', '72小时静止卫星全球云图（约17M）']
+                break
+            case 'circle':
+                itemList = ['72小时FY4B全圆盘（约38M）', '72小时FY4B全圆盘Sandwich（约38M）', '72小时FY4A全圆盘（约28M）']
                 break
             default:
                 itemList = []
@@ -55,8 +58,11 @@ Page({
 
     refresh: function (event) { //刷新图片
         const FY2H = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY2H/VIDEO/FY2H.br.72h.mp4' //“一带一路”区域72小时
-        const FY4A = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.china.72h.mp4' //72小时中国区
-        const FY4A_circle = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.disk.72h.mp4' //72小时全圆盘
+        const FY4A = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.china.72h.mp4' //72小时FY4A中国区
+        const FY4B = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4B/AGRI/GCLR/VIDEO/FY4B.china.72h.mp4' //72小时FY4B中国区
+        const FY4A_circle = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.disk.72h.mp4' //72小时FY4A全圆盘
+        const FY4B_circle = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4B/AGRI/GCLR/VIDEO/FY4B.disk.gclr.72h.mp4' //72小时FY4B全圆盘
+        const FY4B_sandwich = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4B/AGRI/SWCI/VIDEO/FY4B.disk.swci.72h.mp4' //72小时FY4B全圆盘sandwich
         const FY4A_LMI = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/VIDEO/FY4A.LMI.72h.mp4' //72小时闪电云图
         const GEO = 'https://img.nsmc.org.cn/CLOUDIMAGE/GEOS/MOS/IRX/VIDEO/GEOS.MOS.IRX.GBAL.72h.mp4' //72小时静止卫星全球云图
 
@@ -74,23 +80,35 @@ Page({
         var that = this
         switch (this.data.img_name) {
 
-            case "“一带一路”区域72小时（约11M）":
+            case "“一带一路”区域72小时（约12M）":
                 new_img_src = FY2H + "?t=" + cache_time //图片末尾都加时间，为了防止缓存。时间5分钟变一次，防止浪费流量。
                 break;
 
-            case "72小时中国区（约35M）":
-                new_img_src = FY4A + "?t=" + cache_time
+            case "72小时FY4B中国区（约41M）":
+                new_img_src = FY4B + "?t=" + cache_time
+                break;
+    
+            case "72小时FY4B全圆盘（约38M）":
+                new_img_src = FY4B_circle + "?t=" + cache_time
                 break;
 
-            case "72小时全圆盘（约30M）":
+            case "72小时FY4B全圆盘Sandwich（约38M）":
+                new_img_src = FY4B_sandwich + "?t=" + cache_time
+                break;
+
+            case "72小时FY4A中国区（约36M）":
+                new_img_src = FY4A + "?t=" + cache_time
+                break;
+    
+            case "72小时FY4A全圆盘（约28M）":
                 new_img_src = FY4A_circle + "?t=" + cache_time
                 break;
 
-            case "72小时闪电云图（约26M）":
+            case "72小时闪电云图（约30M）":
                 new_img_src = FY4A_LMI + "?t=" + cache_time
                 break;
 
-            case "72小时静止卫星全球云图（约16M）":
+            case "72小时静止卫星全球云图（约17M）":
                 new_img_src = GEO + "?t=" + cache_time
                 break;
         }

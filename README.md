@@ -2,8 +2,9 @@
 
 - **微信小程序列表搜索“气象卫星云图”即可找到本程序。或扫描下方小程序码。**  
 ![mini_program_code.jpg](mini_program_code.jpg)
-- 不久前发现“卫星云图监测”小程序违反开源协议剽窃本项目代码甚至还加广告牟利，不讲码德，没有道德。我劝这位小伙子好自为之，好好反思。详见：[plagiarism.md](plagiarism/plagiarism.md)
+- ~不久前发现“卫星云图监测”小程序违反开源协议剽窃本项目代码甚至还加广告牟利，不讲码德，没有道德。我劝这位小伙子好自为之，好好反思。详见：[plagiarism.md](plagiarism/plagiarism.md)~ 这个无良小程序已下线，可能小伙子已经悔改了。
 - 由于“卫星云图”这个名字已经被注册了，所以我就使用了这个名字。 
+- 现在国家卫星气象中心已推出官方小程序“风云此刻”，推荐大家试试。
 
 ## 更新日志（主要功能更新）
 
@@ -19,6 +20,7 @@
 - v2.0.0 代码重构。更新WeUI版本到2.0。
 - v2.0.1 云函数增强，增加缓存功能，提高请求效率。
 - v2.1.0 因为云函数开始收费，所以取消相关功能，包括原来的动图和Himawari8云图。取消“视频”，改为“动图”。新增闪电云图、FY3D云图、静止卫星全球云图。
+- v2.2.0 增加FY4B卫星云图。
 
 ## 更多信息
 
@@ -32,6 +34,7 @@
 |FY-4A云图（风云四号云图动画）|https://fy4.nsmc.org.cn/nsmc/cn/image/animation.html|
 |FY-4A云图（风云四号云图视频）|https://fy4.nsmc.org.cn/nsmc/cn/image/video.html|
 |FY-4A实时数据（HDF格式）|http://fy4.nsmc.org.cn/data/cn/data/realtime.html|
+|FY-4B主页|http://fy4.nsmc.org.cn/nsmc/cn/theme/FY4B.html|
 |卫星介绍|http://www.nsmc.org.cn/nsmc/cn/satellite/index.html|
 |国家卫星气象中心|https://www.nsmc.org.cn/nsmc/cn/home/index.html|
 |中国气象数据网（可以下数据）|http://data.cma.cn/site/index.html|

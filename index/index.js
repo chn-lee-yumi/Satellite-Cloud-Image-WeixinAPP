@@ -8,7 +8,7 @@ Page({
     data: {
         img_src: "", //图片url
         img_load_complete: false, //图片是否加载完成。false会转圈圈，true则圈圈消失
-        img_name: "FY4A中国区", //图片名字（标题）
+        img_name: "FY4B中国区", //图片名字（标题）
     },
 
     onShareAppMessage(options) {
@@ -35,10 +35,10 @@ Page({
         var itemList
         switch (event.target.dataset.type) {
             case 'area':
-                itemList = ['FY4A中国区', 'FY4A闪电云图', 'FY2H“一带一路”区域', "FY3D全球影像", '静止卫星全球云图']
+                itemList = ['FY4B中国区', 'FY4A中国区', 'FY4A闪电云图', 'FY2H“一带一路”区域', 'FY3D全球影像', '静止卫星全球云图']
                 break
             case 'circle':
-                itemList = ['FY4A圆盘图', 'FY2H圆盘图', 'GOES-WEST圆盘图'] //GOES16也称为GOES-WEST，这个就只写在注释里了
+                itemList = ['FY4B圆盘图', 'FY4A圆盘图', 'FY2H圆盘图', 'GOES-WEST圆盘图'] //GOES16也称为GOES-WEST，这个就只写在注释里了
                 break
             default:
                 itemList = []
@@ -62,8 +62,10 @@ Page({
     imageTap: function (event) { //点击图片，显示大图
         //根据不同的图片，给不同的大图链接
         switch (this.data.img_name) {
+            case "FY4B中国区":
             case "FY4A中国区":
             case "FY4A闪电云图":
+            case "FY4B圆盘图":
             case "FY4A圆盘图":
             case "FY3D全球影像":
             case "静止卫星全球云图":
@@ -89,7 +91,9 @@ Page({
         //FY4A图像时间列表接口 http://fy4.nsmc.org.cn/nsmc/v1/nsmc/image/animation/datatime/mongodb?dataCode=FY4A-_AGRI--_N_REGI_1047E_L1C_TCC-_MULT_GLL_YYYYMMDDHHmm_1000M_V0001.JPG&hourRange=3&isHaveNight=0
         //FY4A大图链接接口 http://fy4.nsmc.org.cn/nsmc/v1/nsmc/image/animation/url?filenameCode=FY4A-_AGRI--_N_REGI_1047E_L1C_MTCC_MULT_GLL_YYYYMMDDhhmmss_YYYYMMDDhhmmss_4000M_V0001.JPG&dateString=20180804134500_
         //注：FY4A大图接口有延迟，暂不使用。
+        const FY4B = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4B/AGRI/GCLR/FY4B_REGC_GCLR.JPG' //FY4B中国区
         const FY4A = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/FY4A_CHINA.JPG' //FY4A中国区
+        const FY4B_circle = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4B/AGRI/GCLR/FY4B_DISK_GCLR.JPG' //FY4B圆盘图
         const FY4A_circle = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY4A/MTCC/FY4A_DISK.JPG' //FY4A圆盘图
         const FY2H = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY2H/GLL/FY2H_ETV_SEC_GLB.jpg' //FY2H“一带一路”区域
         const FY2H_circle = 'http://img.nsmc.org.cn/CLOUDIMAGE/FY2H/NOM/FY2H_ETV_NOM.jpg' //FY2H圆盘图
@@ -112,12 +116,20 @@ Page({
         var that = this
         switch (this.data.img_name) {
 
+            case "FY4B中国区":
+                new_img_src = FY4B + "?t=" + cache_time //图片末尾都加时间，为了防止缓存。时间5分钟变一次，防止浪费流量。
+                break;
+
             case "FY4A中国区":
                 new_img_src = FY4A + "?t=" + cache_time //图片末尾都加时间，为了防止缓存。时间5分钟变一次，防止浪费流量。
                 break;
 
             case "FY4A闪电云图":
                 new_img_src = FY4A_LMI + "?t=" + cache_time //图片末尾都加时间，为了防止缓存。时间5分钟变一次，防止浪费流量。
+                break;
+
+            case "FY4B圆盘图":
+                new_img_src = FY4B_circle + "?t=" + cache_time
                 break;
 
             case "FY4A圆盘图":

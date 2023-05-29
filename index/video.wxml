@@ -27,7 +27,8 @@
         <!-- 按钮 -->
         <view class="button-sp-area">
             <!--使用data-type传参数到openList函数，根据不同的data-type，来选择区域图或圆盘图-->
-            <button class="weui-btn mini-btn" size="mini" type="default" bindtap="openList" data-type="all">选择动图</button>
+            <button class="weui-btn mini-btn" size="mini" type="default" bindtap="openList" data-type="area">查看区域图</button>
+            <button class="weui-btn mini-btn" size="mini" type="default" bindtap="openList" data-type="circle">查看圆盘图</button>
             <button class="weui-btn mini-btn" size="mini" type="default" bindtap="refresh">刷新</button>
         </view>
 
